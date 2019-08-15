@@ -5,7 +5,7 @@ const app = express();
 // use JSON parse in body. middleware
 app.use(express.json());
 
-// in bash: "export PORT=3000"
+// in terminal: "source .env"
 const port = process.env.PORT || 3000;
 
 
@@ -30,11 +30,9 @@ app.post('/api/mail',(req,res) => {
 
     const result = Joi.validate(req.body,schema);
 
-    if(result.error){
+    if(result.error)
         // 400 for bad request
-        res.status(400).send(result.error.details[0].message);
-        return;
-    }
+        return  res.status(400).send(result.error.details[0].message);
 
     const msg = {
         to: 'daviddadaa@hotmail.com',
